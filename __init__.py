@@ -1,17 +1,7 @@
-from libs.main import IOStries, IOAnySEO, IOSEOMetrics, IOArticles, IOStr
+from libs.main import IOStries, IOAnySEO, IOSEOMetrics, IOArticles
 
-new = IOArticles(articles=["dir/selam.txt"], types={"file_path":True, "plaintext":True})
+obj = IOStries("Test")
 
-obj = IOStries("")
-
-
-def similarity(query, stack:str | list | tuple):
-    length = IOStries("").get_length([x for x in query])
-    l = IOStries(query).types["n_lower"]
-    u = IOStries(query).types["n_upper"]
-    s = length - (u+l)
-
-    return {"length":length, "upper":u, "lower":l, "special":s}
 
 def find_similar(query:str, stack:list | tuple, return_types=False) -> int | dict:
     similartypes, iotypes = {}, {}
@@ -56,4 +46,4 @@ def __similar__(query: str, stack_part: str, return_types=False):
         return sum([x for x in _.values()])
     return __
 
-print(f'Percentage of similarity: {__similar__("hello", "MERHabA")}')
+print(f'Percentage of similarity: {__similar__("helloguys", "HeLlo,,%4+GuYs")}')
