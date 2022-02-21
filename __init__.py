@@ -34,11 +34,12 @@ def __similar__(query: str, stack_part: str, return_types=False):
     
     q = count_chars(query, True)
     s  = count_chars(stack_part, True)
+    tr = "aeıAEIiİÜUOÖuüoö"
     includes_same_chars = ("".join(sorted(list(set([x for x in count_chars(query.lower(), True)]))))).strip() == ("".join(sorted(list(set([x for x in count_chars(stack_part.lower(), True)]))))).strip()
     vowel_n_consonant = IOStries(query).get_char_types()["vowels"] == IOStries(stack_part).get_char_types()["vowels"] and IOStries(query).get_char_types()["consonant"] == IOStries(stack_part).get_char_types()["consonant"]
-    begin_with_vowel = (q[0] in "aeıAEIiİÜUOÖ") and (s[0] in "aeıAEIiİÜUOÖ")
+    begin_with_vowel = (q[0] in tr and (s[0] in tr)
     begin_with_consonant = not begin_with_vowel
-    ends_with_consonant = q not in "aeıAEIiİÜUOÖ" and s not in "aeıAEIiİÜUOÖ"
+    ends_with_consonant = q not in tr and s not in tr
     ends_with_vowel = not ends_with_consonant
     _ = {"equivalent":0 if not equivalent else 40, "vowel_n_consonant": 0 if not vowel_n_consonant else 20, "begin_with_vowel":0 if not begin_with_vowel else 5, "begin_with_consonant":0 if not begin_with_consonant else 5, "ends_with_consonant":0 if not ends_with_consonant else 5, "ends_with_vowel":0 if not ends_with_vowel else 5, "same_chars_score": 0 if not includes_same_chars else 20 }
     __ = {"percentage":sum([x for x in _.values()]), "equivalent":0 if not equivalent else 1, "vowel_n_consonant": 0 if not vowel_n_consonant else 1, "begin_with_vowel":0 if not begin_with_vowel else 5, "begin_with_consonant":0 if not begin_with_consonant else 1, "ends_with_consonant":0 if not ends_with_consonant else 1, "ends_with_vowel":0 if not ends_with_vowel else 1, "same_chars_score": 0 if not includes_same_chars else 1 }
